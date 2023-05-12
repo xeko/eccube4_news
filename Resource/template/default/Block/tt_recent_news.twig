@@ -1,0 +1,39 @@
+{% set NewsList = repository('Eccube\\Entity\\News').getList() %}
+<div class="ec-role">
+    <div class="ec-newsRole">
+        <div class="ec-secHeading">
+            <span class="ec-secHeading__en">{{ 'NEWS'|trans }}</span>
+            <span class="ec-secHeading__line"></span>
+            <span class="ec-secHeading__ja">{{ '新着情報'|trans }}</span>
+        </div>
+        <div class="ec-newsRole__news">
+            {% set break = false %}
+            {% for index , News in NewsList if not break  %}
+
+                <div class="ec-newsRole__newsItem">
+                    <div class="ec-newsRole__newsHeading">
+                        <div class="ec-newsRole__newsDate">
+                            {{ News.publish_date|date_day }}
+                        </div>
+                        <div class="ec-newsRole__newsColumn">
+                            {% if News.url %}
+                                <a href="{{ News.url }}" {% if News.link_method == '1' %}target="_blank"{% endif %} class="ec-newsRole__newsTitle">
+                                {% else %}
+                                    <a href="{{ url('news_detail', {'id': News.id}) }}" class="ec-newsRole__newsTitle">
+                                    {% endif %}
+                                    {{ News.title }}
+                                </a>
+                        </div>
+                    </div>
+                </div>
+
+                {% if index >= 5 %}
+                    <div class="text-right ec-newsRole__newsItem">
+                        <a class="btn btn-default" href="{{ url('news_index') }}" role="button">ニュース一覧 <span aria-hidden="true">&rarr;</span></a>
+                    </div>
+                    {% set break = true %}
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
