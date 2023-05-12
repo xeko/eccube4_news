@@ -1,0 +1,12 @@
+{
+  "name": "ec-cube/newsupgrade",
+  "version": "1.0.0",
+  "description": "お知らせ",
+  "type": "eccube-plugin",
+  "require": {
+    "ec-cube/plugin-installer": "~0.0.7 || ^2.0"
+  },
+  "extra": {
+    "code": "NewsUpgrade"
+  }
+}
